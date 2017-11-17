@@ -1,0 +1,16 @@
+#contact{
+	.alert{
+		margin-bottom: 0;
+	    border: 0;
+	}
+	.list{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		li{
+			padding: 15px;
+			border-bottom: 1px solid #f0f0f0;
+			margin-top: 10px;
+		}
+	}
+} 

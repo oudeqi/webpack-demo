@@ -1,0 +1,112 @@
+#photes{
+	h1{
+		text-align:center;
+		margin: 50px auto;
+	}
+	.modal{
+		.modal-dialog{
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			position: fixed;
+			top: 0;
+			left: 0;
+			bottom: 0;
+			right: 0;
+			margin: 0;
+			transition: none;
+			transform: none;
+			.modal-content{
+				overflow: auto;
+				max-height: 100%;
+				border-radius: 0;
+				width: auto;
+				max-width: 100%;
+				padding: 20px 15px;
+				box-shadow: none;
+				img{
+					display: block;
+					max-width: 100%;
+				}
+				button{
+					border: 0;
+					float: right;
+					width: 36px;
+					height: 36px;
+					line-height: 36px;
+					text-align: center;
+					outline: 0;
+					background: #000;
+					opacity: 0.3;
+					color: #fff;
+					font-size: 1em;
+					margin: 0;
+					padding: 0;
+				}
+			}
+		}
+	}
+}
+
+.content{
+	padding-bottom: 40px;
+	text-align: center;
+	position: relative;
+	img{
+		max-width: 220px;
+		padding:10px 10px 15px; 
+		background:white; 
+		border:1px solid #ddd; 
+		box-shadow:2px 2px 3px rgba(50, 50, 50, 0.4);
+		transition:all 0.2s ease-in; 
+		position:relative;
+		z-index:1;
+	}
+	.pic1{
+		transform: rotate(-5deg);
+	}
+
+	.pic2{
+		transform: rotate(-20deg);
+	}
+
+	.pic3{
+		transform: rotate(5deg);
+	}
+		
+	.pic4{
+		transform: rotate(-10deg);
+	}
+
+	.pic5{
+		transform: rotate(-10deg);
+	}
+
+	.pic6{
+		transform: rotate(10deg);
+	}
+
+	.pic7{
+		transform: rotate(20deg);
+	}
+
+	.pic8{
+		transform: rotate(5deg);
+	}
+
+	.pic9{
+		transform: rotate(15deg);
+	}
+
+	.pic10{
+		transform: rotate(-10deg);
+	}
+}
+.content a:hover img,
+.content a:active img{
+	box-shadow:15px 15px 20px rgba(50, 50, 50, 0.4); 
+	transform:rotate(0deg) scale(1.20) !important;
+	z-index:2;
+}
+

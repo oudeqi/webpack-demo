@@ -1,0 +1,25 @@
+@import '../../assets/styles/_variable.css';
+@import '../../assets/styles/_mixins.css';
+@import '../../assets/styles/_extends.css';
+
+.jumbotron{
+	background: #eee url(../../assets/images/banner03.jpg) no-repeat center;
+	background-size: cover;
+	color: #fff;
+	h1{
+		font-size: responsive;
+		lower-font-range: $min_width;
+		upper-font-range: $max_width;
+		min-font-size: 30px;
+		max-font-size: 50px;
+	}
+	a{
+		color: #fff;
+		text-decoration: underline;
+		font-size: responsive;
+		lower-font-range: $min_width;
+		upper-font-range: $max_width;
+		min-font-size: 18px;
+		max-font-size: 22px;
+	}
+}

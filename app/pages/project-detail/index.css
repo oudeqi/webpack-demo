@@ -1,0 +1,43 @@
+#detail{
+	.page-header{
+		display: none;
+	}
+	.alert{
+		margin-bottom: 0;
+	    border: 0;
+	    display: none;
+	}
+	.list{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: none;
+		li{
+			padding: 15px 10px;
+			border-bottom: 1px solid #f0f0f0;
+			margin-top: 10px;
+		}
+	}
+	.preview{
+		padding-top: 15px;
+		margin-top: 20px;
+		display: none;
+	}
+	.row{
+		margin-top: 20px;
+		.col-xs-12{
+			margin-bottom: 30px;
+		}
+		img{
+			max-width: 100%;
+			display: block;
+			height: auto;
+		}
+	}
+}
+
+@media screen and (width <768px){
+	#detail .row .col-sm-6{
+		margin-bottom: 20px;
+	}
+}

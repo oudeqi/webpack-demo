@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+	<head>
+		#include("../../components/meta/meta.html")
+	</head>
+	<body data-spy="scroll" data-target="#spyTarget" id="index">
+		<div id='layout'>
+		    #include("../../components/header/header.html")
+			#include("../../components/jumbotron/jumbotron.html")
+			<div class="container mar-b-30">
+				<div class="row">
+					<div class="hidden-xs col-sm-4 col-md-3" id="spyTarget">					
+						<ul class="nav nav-pills nav-stacked affixNav" data-spy="affix" data-offset-top="351">
+			                <li class="active"><a href="#pc">pc端项目</a></li>
+			                <li><a href="#yd">移动端项目</a></li>
+			            </ul>
+					</div>
+					<div class="col-xs-12 col-sm-8 col-md-9 content">
+						<div class="mar-b-20" id="pc">
+							<h3 class="category">PC端项目</h3>
+							<div class="row"></div>
+						</div>
+						<div id="yd">
+							<h3 class="category">移动端项目</h3>
+							<div class="row"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		    <div id='layout_footer'></div>
+		</div>
+		<div id='footer'>
+			#include("../../components/footer/footer.html")
+		</div>
+	</body>
+</html>
