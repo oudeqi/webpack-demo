@@ -115,6 +115,8 @@ module.exports = {
                 })
             },
             {
+                //image-webpack-loader
+                //webpack-spritesmith
                 test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
                 loader: 'url-loader',
                 options: {
