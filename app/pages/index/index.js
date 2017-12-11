@@ -1,8 +1,13 @@
 // __webpack_public_path__ = process.env.PUBLIC_PATH;
 console.log(process.env.PUBLIC_PATH);
-
+import '../../assets/scripts/common.js';
 import '../../assets/styles/common.css';
 import './index.css';
+
+// 测试模拟数据
+$.get('http://localhost:3005/employee/123', function(res){
+	console.log(res);
+})
 
 //当前页面选中
 $('[data-flag="index"]').addClass('active');

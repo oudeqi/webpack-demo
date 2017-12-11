@@ -6,14 +6,13 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const { NODE_ENV, PUBLIC_PATH, SERVICE_URL } = require('../config');
-
 const minify = {
     removeComments: true,
     collapseWhitespace: true,
     removeAttributeQuotes: true
 };
 
-const getJsEntry = function(globPath) {
+function getJsEntry(globPath) {
     let entries = {};
     Glob.sync(globPath).forEach(function (entry) {
         if(!!entry.match(/\.\/app\/pages\//)){
@@ -25,10 +24,16 @@ const getJsEntry = function(globPath) {
             throw new Error('只能在“./app/pages/”目录下面找入口');
         }
     });
-    return entries;
+    if (NODE_ENV === 'production') {
+        return Object.assign({}, entries, {
+            vendor: ['jquery', 'bootstrap', 'bootstrap/dist/css/bootstrap.css']
+        });
+    } else {
+        return entries;
+    }
 };
 
-const getHtmlEntry = function(globPath) {
+function getHtmlEntry(globPath) {
     let entries = [];
     Glob.sync(globPath).forEach(function (entry) {
         if(!!entry.match(/\.\/app\/pages\//)){
@@ -37,7 +42,11 @@ const getHtmlEntry = function(globPath) {
             let pathname = path.dirname(entry).split('/').reverse()[0];
             config['filename'] = pathname + path.extname(entry);
             config['template'] = 'html-withimg-loader!' + entry;
-            config['chunks'] = ['manifest', 'vendor'].concat([pathname]);
+            if (NODE_ENV === 'production') {
+                config['chunks'] = ['manifest', 'vendor'].concat([pathname]);
+            } else {
+                config['chunks'] = [].concat([pathname]);
+            }
             config['minify'] = NODE_ENV === 'production' ? minify : false;
             config['chunksSortMode'] = 'dependency';
             entries.push(config);
@@ -48,14 +57,14 @@ const getHtmlEntry = function(globPath) {
     return entries;
 };
 
+require('nodemon')('./dyson_services/index.js');
+
 module.exports = {
     context: path.resolve(__dirname, '..', 'app'),
-    entry: Object.assign({}, getJsEntry('./app/pages/**/index.js'), {
-        vendor: ['jquery', 'bootstrap', 'bootstrap/dist/css/bootstrap.css']
-    }),
+    entry: getJsEntry('./app/pages/**/index.js'),
     output: {
         path: path.join(__dirname, '..', 'dist'),
-        filename: 'js/[name].js',
+        filename: NODE_ENV === 'development' ? 'js/[name].js' : 'js/[name].[chunkhash:8].js',
         publicPath: PUBLIC_PATH,
         pathinfo: NODE_ENV === 'development'
     },
@@ -109,13 +118,14 @@ module.exports = {
                 test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
                 loader: 'url-loader',
                 options: {
-                    name: 'img/[name].[hash:8].[ext]',
+                    name: NODE_ENV === 'development' ? 'img/[name].[ext]' : 'img/[name].[hash:8].[ext]',
                     // publicPath: PUBLIC_PATH,
                     // 单独设置图片资源的publicPath，其他文件保留output配置里的publicPath
                     // 会覆盖 css里面的 图片的对外路径
                     // 会影响 html里面 img标签的src属性
                     // 会覆盖 output配置里的 publicPath
                     limit: 1024 * 5,
+                    // limit: 1,
                 }
             },
             {
@@ -145,7 +155,7 @@ module.exports = {
                 test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
                 loader: 'file-loader',
                 options: {
-                    name: 'fonts/[name].[hash:8].[ext]',
+                    name: NODE_ENV === 'development' ? 'fonts/[name].[ext]' : 'fonts/[name].[hash:8].[ext]',
                     publicPath: '../',
                     // 会覆盖css里面的字体的对外路径，所以不设置
                     // 或者和css里字体的对外路径设置成一样
@@ -170,10 +180,6 @@ module.exports = {
                 'SERVICE_URL': JSON.stringify(SERVICE_URL),
             }
         }),
-        // new webpack.DllReferencePlugin({
-        //     context: __dirname,
-        //     manifest: require('../vendor/vendor-manifest.json')
-        // }),
         ...getHtmlEntry('./app/pages/**/index.html').map((item, index) => {
             return new HtmlWebpackPlugin(item);
         })

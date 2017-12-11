@@ -1,7 +1,6 @@
 @import '../../assets/styles/_variable.css';
 @import '../../assets/styles/_mixins.css';
 @import '../../assets/styles/_extends.css';
-
 #index{
 	ul.affixNav{
 		&.affix {

@@ -5,7 +5,7 @@
 .jumbotron{
 	background: #eee url(../../assets/images/banner03.jpg) no-repeat center;
 	background-size: cover;
-	color: #fff;
+	color: #fff !important;
 	h1{
 		font-size: responsive;
 		lower-font-range: $min_width;

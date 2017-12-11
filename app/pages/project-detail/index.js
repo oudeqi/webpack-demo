@@ -1,3 +1,4 @@
+import '../../assets/scripts/common.js';
 import '../../assets/styles/common.css';
 import './index.css';
 

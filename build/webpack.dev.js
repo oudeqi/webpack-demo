@@ -5,8 +5,8 @@ const base = require('./webpack.base.js');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = merge(base, {
-    devtool: '#cheap-module-eval-source-map',
-    // devtool: '#source-map',
+    // devtool: '#cheap-module-eval-source-map',
+    devtool: '#source-map',
     devServer: {
         host: "localhost",
         contentBase: [path.join(__dirname, '..', 'dist')],
@@ -24,15 +24,6 @@ module.exports = merge(base, {
         // openPage: '/different/page'
     },
     plugins: [
-        new webpack.optimize.CommonsChunkPlugin({
-            name: ['vendor'],
-            minChunks: Infinity,
-            filename: 'js/[name].js',
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest',
-            minChunks: Infinity
-        }),
         new ExtractTextPlugin({
             filename: 'css/[name].css',
             allChunks: false

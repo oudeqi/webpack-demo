@@ -2,6 +2,8 @@ module.exports = function({file, options, env}){
 	return {
 		plugins: {
 			'precss': {},
+			'postcss-at2x': {},//retina 2倍图片
+			// 'postcss-triangle': {},//创建三角形
 			// 'postcss-px-to-viewport': {
 			// 	viewportWidth: 320,
 			// 	viewportHeight: 568,
@@ -11,8 +13,10 @@ module.exports = function({file, options, env}){
 			// 	minPixelValue: 1,
 			// 	mediaQuery: false
 			// },//px转vw
+			// 'postcss-inline-svg': {},//可以修改SVG
+			'postcss-write-svg': {},//可以在CSS里创建简单的SVG图像
 			'postcss-assets': {
-				loadPaths: ['app/images/'],
+				loadPaths: ['app/assets/images/'],
 				relative: true
 			},
 			'postcss-will-change': {},//给不支持will-change属性的浏览器触发GPU处理器
@@ -21,8 +25,6 @@ module.exports = function({file, options, env}){
 			'postcss-pseudoelements': {},//给不支持::伪元素的ie8作降级处理
 			'postcss-vmin': {},//给不支持vmin的ie9作降级处理
 			'postcss-calc': {},//尽可能让calc输出静态的值
-			'postcss-at2x': {},//retina 2倍图片
-			'postcss-write-svg': {},//在样式表的写svg // TODO 可能要废弃,与cssnano不兼容
 			'postcss-aspect-ratio-mini': {},//长宽比效果
 			// 'postcss-px2rem': {
 			// 	remUnit: 32

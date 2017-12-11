@@ -5,6 +5,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = merge(base, {
+    // devtool: '#cheap-module-eval-source-map',
     devtool: '#source-map',
     plugins: [
         new webpack.BannerPlugin('版权所有，翻版必究'),
@@ -14,14 +15,14 @@ module.exports = merge(base, {
             allChunks: false
         }),
         new webpack.optimize.CommonsChunkPlugin({
-            name: ['vendor'],
+            name: ['vendor', 'manifest'],
             minChunks: Infinity,
             filename: 'js/[name].[chunkhash:8].js',
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest',
-            minChunks: Infinity
-        }),
+        // new webpack.DllReferencePlugin({
+        //     context: __dirname,
+        //     manifest: require('../vendor/vendor-manifest.json')
+        // }),
         new UglifyJSPlugin({
             sourceMap: true
         })
