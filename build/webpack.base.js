@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const SpritesmithPlugin = require('webpack-spritesmith');
 
 const { NODE_ENV, PUBLIC_PATH, SERVICE_URL } = require('../config');
 const minify = {
@@ -75,19 +76,13 @@ module.exports = {
         }
     },
     module: {
-        rules: [
-            {
-                test: /\.json5$/,
-                loader: 'json5-loader'
-            },
-            {
+        rules: [{
                 test: /(\.jsx|\.js)$/,
                 exclude: /(node_modules|bower_components)/,
                 use: {
                     loader: 'babel-loader'
                 }
-            },
-            {
+            },{
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
@@ -101,7 +96,7 @@ module.exports = {
                         options: {
                             modules: false
                         }
-                    }, {
+                    },{
                         loader: "postcss-loader",
                         options: {
                             config: {
@@ -113,35 +108,52 @@ module.exports = {
                         }
                     }],
                 })
-            },
-            {
-                //image-webpack-loader
-                //webpack-spritesmith
+            },{
                 test: /\.(png|jpe?g|gif|svg)(\?\S*)?$/,
-                loader: 'url-loader',
-                options: {
-                    name: NODE_ENV === 'development' ? 'img/[name].[ext]' : 'img/[name].[hash:8].[ext]',
-                    // publicPath: PUBLIC_PATH,
-                    // 单独设置图片资源的publicPath，其他文件保留output配置里的publicPath
-                    // 会覆盖 css里面的 图片的对外路径
-                    // 会影响 html里面 img标签的src属性
-                    // 会覆盖 output配置里的 publicPath
-                    limit: 1024 * 5,
-                    // limit: 1,
-                }
-            },
-            {
+                use: [{
+                    loader: 'url-loader',
+                    options: {
+                        name: NODE_ENV === 'development' ? 'img/[name].[ext]' : 'img/[name].[hash:8].[ext]',
+                        // publicPath: PUBLIC_PATH,
+                        // 单独设置图片资源的publicPath，其他文件保留output配置里的publicPath
+                        // 会覆盖 css里面的 图片的对外路径
+                        // 会影响 html里面 img标签的src属性
+                        // 会覆盖 output配置里的 publicPath
+                        limit: 1024 * 5
+                    }
+                },{
+                    loader: 'image-webpack-loader',
+                    options: {
+                        bypassOnDebug: true,
+                        mozjpeg: {
+                            progressive: true,
+                            quality: 65
+                        },
+                        optipng: {
+                            enabled: false,
+                        },
+                        pngquant: {
+                            quality: '65-90',
+                            speed: 4
+                        },
+                        gifsicle: {
+                            interlaced: false,
+                        },
+                        webp: {
+                            quality: 75
+                        }
+                    }
+                }]
+            },{
                 test: /\.html$/,
-                use: [
-                    {
+                use: [{
                         loader: "html-withimg-loader",
                         options: {
                             // exclude: /image/,//排除image目录
                             min: false,//默认会去除html中的换行符，配置min=false可不去除
                             deep: false,//将关闭include语法嵌套子页面的功能
                         }
-                    },
-                    {
+                    },{
                         loader: "html-loader",
                         options: {
                             attrs: ['img:data-src'],
@@ -150,10 +162,8 @@ module.exports = {
                             removeComments: false,
                             collapseWhitespace: false,
                         }
-                    }
-                ]
-            },
-            {
+                    }]
+            },{
                 test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
                 loader: 'file-loader',
                 options: {
@@ -180,6 +190,30 @@ module.exports = {
                 'NODE_ENV': JSON.stringify(NODE_ENV),
                 'PUBLIC_PATH': JSON.stringify(PUBLIC_PATH),
                 'SERVICE_URL': JSON.stringify(SERVICE_URL),
+            }
+        }),
+        new SpritesmithPlugin({
+            src: {
+                cwd: path.join(__dirname, '..', 'app/assets/sprites/'),
+                glob: '*.png'
+            },
+            target: {
+                image: path.join(__dirname, '..', 'app/assets/images/_sprites.png'),
+                // css: path.join(__dirname, '..', 'app/assets/styles/_sprites.css')
+                css: [
+                    [path.join(__dirname, '..', 'app/assets/styles/_sprites.css'), {
+                        format: 'handlebars_based_template'
+                    }]
+                ]
+            },
+            apiOptions: {
+                cssImageRef: '../images/_sprites.png'
+            },
+            customTemplates: {
+                'handlebars_based_template': path.join(__dirname, '..', 'handlebarsStr.css.handlebars')
+            },
+            spritesmithOptions: {
+                padding: 10
             }
         }),
         ...getHtmlEntry('./app/pages/**/index.html').map((item, index) => {

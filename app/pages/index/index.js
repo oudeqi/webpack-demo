@@ -3,6 +3,7 @@ console.log(process.env.PUBLIC_PATH);
 import '../../assets/scripts/common.js';
 import '../../assets/styles/common.css';
 import './index.css';
+import '../../components/jumbotron/jumbotron.js';
 
 // 测试模拟数据
 $.get('http://localhost:3005/employee/123', function(res){
@@ -30,9 +31,8 @@ $(window).resize(function(){
 	$('.affixNav').attr('data-offset-top',dataOffsetTop);
 });
 
-
 // 生成列表
-let maps = require('./data.js').default;
+let maps = require('../../assets/data/index.js').default;
 maps.forEach(item => {
 	let domStr=`<div class="col-xs-6 col-sm-6 col-md-4">
 					<a href="./project-detail.html?id=${item.id}" class="thumbnail">

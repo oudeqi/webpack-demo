@@ -3,23 +3,59 @@
 @import '../../assets/styles/_extends.css';
 
 .jumbotron{
-	background: #eee url(../../assets/images/banner03.jpg) no-repeat center;
+	background: #eee url(../../assets/images/6.jpg) fixed no-repeat center;
 	background-size: cover;
-	color: #fff !important;
+	color: #fff;
+	padding: 90px 0;
+	.container{
+		transition: all 0.5s linear;
+		&.trans{
+			transform: translateY(50px);
+		}
+	}
 	h1{
 		font-size: responsive;
 		lower-font-range: $min_width;
 		upper-font-range: $max_width;
 		min-font-size: 30px;
 		max-font-size: 50px;
+		margin-bottom: 20px;
+		
 	}
-	a{
-		color: #fff;
-		text-decoration: underline;
-		font-size: responsive;
-		lower-font-range: $min_width;
-		upper-font-range: $max_width;
-		min-font-size: 18px;
-		max-font-size: 22px;
+	p{
+		a{
+			color: #fff;
+			text-decoration: underline;
+			font-size: responsive;
+			lower-font-range: $min_width;
+			upper-font-range: $max_width;
+			min-font-size: 18px;
+			max-font-size: 22px;
+		}
+	}
+}
+
+@media screen and (width < 1200px){
+	.jumbotron{
+		padding: 60px 0;
+		.container{
+			&.trans{
+				transform: translateY(30px);
+			}
+		}
+		h1{
+			margin-bottom: 10px;
+		}
+	}
+}
+
+@media screen and (width < 768px){
+	.jumbotron{
+		padding: 40px 0;
+		.container{
+			&.trans{
+				transform: translateY(25px);
+			}
+		}
 	}
 }

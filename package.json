@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dll": "webpack --config build/webpack.dll.js --progress --profile --colors",
+    "dll": "webpack --config build/webpack.dll.js -p --progress --profile --colors",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js --progress --profile --colors --open",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config build/webpack.dev.js --progress --profile --colors --open",
     "prod": "cross-env NODE_ENV=production webpack --config build/webpack.prod.js --progress --profile --colors"
@@ -27,17 +27,10 @@
     "dyson-image": "^0.2.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
-    "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.2",
-    "gulp-imagemin": "^3.3.0",
-    "gulp.spritesmith": "^6.5.1",
     "html-loader": "^0.5.1",
     "html-webpack-plugin": "^2.30.1",
     "html-withimg-loader": "^0.1.16",
-    "imagemin-pngquant": "^5.0.1",
-    "imports-loader": "^0.7.1",
-    "json5-loader": "^1.0.1",
-    "merge-stream": "^1.0.1",
+    "image-webpack-loader": "^3.4.2",
     "nodemon": "^1.12.5",
     "postcss-aspect-ratio-mini": "^0.0.2",
     "postcss-assets": "^5.0.0",
@@ -52,7 +45,6 @@
     "postcss-px-to-viewport": "^0.0.3",
     "postcss-px2rem": "^0.3.0",
     "postcss-responsive-type": "^1.0.0",
-    "postcss-sprites": "^4.2.1",
     "postcss-triangle": "^2.0.0",
     "postcss-vmin": "^3.0.0",
     "postcss-will-change": "^2.0.0",
@@ -61,10 +53,10 @@
     "style-loader": "^0.18.2",
     "uglifyjs-webpack-plugin": "^1.0.0-beta.3",
     "url-loader": "^0.5.9",
-    "vinyl-buffer": "^1.0.0",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.8.2",
-    "webpack-merge": "^4.1.0"
+    "webpack-merge": "^4.1.0",
+    "webpack-spritesmith": "^0.3.5"
   },
   "dependencies": {
     "bootstrap": "^3.3.7",

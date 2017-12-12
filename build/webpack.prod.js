@@ -20,8 +20,7 @@ module.exports = merge(base, {
             filename: 'js/[name].[chunkhash:8].js',
         }),
         // new webpack.DllReferencePlugin({
-        //     context: __dirname,
-        //     manifest: require('../vendor/vendor-manifest.json')
+        //     manifest: require('../dll_modules/vendor-manifest.json')
         // }),
         new UglifyJSPlugin({
             sourceMap: true
