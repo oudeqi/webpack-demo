@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const SpritesmithPlugin = require('webpack-spritesmith');
+const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 
 const { NODE_ENV, PUBLIC_PATH, SERVICE_URL } = require('../config');
 const minify = {
@@ -171,7 +172,18 @@ module.exports = {
         }),
         ...getHtmlEntry('./app/pages/**/index.html').map((item, index) => {
             return new HtmlWebpackPlugin(item);
-        })
+        }),
+        // new webpack.DllReferencePlugin({
+        //     manifest: require('../dll_modules/dll-manifest.json')
+        // }),
+        // new AddAssetHtmlPlugin([{
+        //     filepath: path.join(__dirname, '..', 'dll_modules', 'dll.js'),
+        //     hash: true,
+        //     outputPath: 'vendor',
+        //     publicPath: './vendor/',
+        //     includeSourcemap: false
+        //     // 默认为true。 当设置为true时，add-asset-html-plugin 会查找js的sourceMap文件
+        // }])
     ]
 }
 

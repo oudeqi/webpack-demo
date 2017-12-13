@@ -68,9 +68,6 @@ module.exports = merge(base, {
             minChunks: Infinity,
             filename: 'js/[name].[chunkhash:8].js',
         }),
-        new webpack.DllReferencePlugin({
-            manifest: require('../dll_modules/dll-manifest.json')
-        }),
         new UglifyJSPlugin({
             sourceMap: true
         })
