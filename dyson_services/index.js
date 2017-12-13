@@ -2,7 +2,7 @@ const dyson = require('dyson');
 
 dyson.bootstrap({
 	configDir: __dirname,
-	port: 3006
+	port: 3005
 });
 
 // Provided dyson is installed globally,
