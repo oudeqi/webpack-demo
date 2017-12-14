@@ -21,7 +21,8 @@ module.exports = merge(base, {
                     // 会覆盖 output配置里的 publicPath
                     limit: 1024 * 5
                 }
-            },{
+            },
+            {
                 loader: 'image-webpack-loader',
                 options: {
                     bypassOnDebug: true,

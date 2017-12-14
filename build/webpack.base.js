@@ -83,7 +83,8 @@ module.exports = {
                 use: {
                     loader: 'babel-loader'
                 }
-            },{
+            },
+            {
                 test: /\.css$/,
                 use: ExtractTextPlugin.extract({
                     fallback: "style-loader",
@@ -97,7 +98,8 @@ module.exports = {
                         options: {
                             modules: false
                         }
-                    },{
+                    },
+                    {
                         loader: "postcss-loader",
                         options: {
                             config: {
@@ -109,7 +111,8 @@ module.exports = {
                         }
                     }],
                 })
-            },{
+            },
+            {
                 test: /\.html$/,
                 use: [{
                         loader: "html-withimg-loader",
@@ -118,7 +121,8 @@ module.exports = {
                             min: false,//默认会去除html中的换行符，配置min=false可不去除
                             deep: false,//将关闭include语法嵌套子页面的功能
                         }
-                    },{
+                    },
+                    {
                         loader: "html-loader",
                         options: {
                             attrs: ['img:data-src'],

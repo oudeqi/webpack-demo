@@ -22,7 +22,8 @@ module.exports = merge(base, {
                     limit: 1024 * 5
                 }
             }]
-        },{
+        },
+        {
             test: /\.(eot|svg|ttf|woff|woff2)(\?\S*)?$/,
             loader: 'file-loader',
             options: {
